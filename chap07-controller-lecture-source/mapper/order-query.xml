@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="selectAllCategory">
+		SELECT
+		       A.CATEGORY_CODE
+		     , A.CATEGORY_NAME
+		  FROM TBL_CATEGORY A
+    </entry>
+    <entry key="selectMenuByCategory">
+        SELECT
+               A.MENU_CODE
+             , A.MENU_NAME
+             , A.MENU_PRICE
+             , A.CATEGORY_CODE
+             , A.ORDERABLE_STATUS
+          FROM TBL_MENU A
+         WHERE A.ORDERABLE_STATUS = 'Y'
+           AND A.CATEGORY_CODE = ?
+    </entry>
+    <entry key="insertOrder">
+    	INSERT
+    	  INTO TBL_ORDER A
+    	(
+    	  A.ORDER_CODE
+    	, A.ORDER_DATE
+    	, A.ORDER_TIME
+    	, A.TOTAL_ORDER_PRICE
+    	)
+    	VALUES
+    	(
+    	  SEQ_ORDER_CODE.NEXTVAL
+    	, ?
+    	, ?
+    	, ?
+    	)
+    </entry>
+    <entry key="selectLastOrderCode">
+    	SELECT
+    	       SEQ_ORDER_CODE.CURRVAL
+    	  FROM DUAL
+    </entry>
+    <entry key="insertOrderMenu">
+    	INSERT
+    	  INTO TBL_ORDER_MENU A
+    	(
+    	  A.ORDER_CODE
+    	, A.MENU_CODE
+    	, A.ORDER_AMOUNT
+    	)
+    	VALUES
+    	(
+    	  ?
+    	, ?
+    	, ?
+    	)
+    </entry>
+</properties>
